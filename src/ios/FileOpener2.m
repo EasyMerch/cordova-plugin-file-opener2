@@ -109,7 +109,7 @@ NSString* callbackId = nil;
 		}
 
 		if (wasOpened) {
-			pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString: @""];
+			// pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString: @""];
 		} else {
 			NSDictionary *jsonObj = [ [NSDictionary alloc]
 				initWithObjectsAndKeys :
@@ -131,6 +131,11 @@ NSString* callbackId = nil;
 }
 
 - (void)documentInteractionControllerDidEndPreview:(UIDocumentInteractionController *)controller {
+	// [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
+}
+
+- (void) documentInteractionControllerWillBeginPreview: (UIDocumentInteractionController *)controller{
+	pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString: @""];
 	[self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 }
 
