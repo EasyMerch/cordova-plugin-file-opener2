@@ -109,7 +109,8 @@ NSString* callbackId = nil;
 		}
 
 		if (wasOpened) {
-			// pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString: @""];
+			pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString: @"open"];
+			[self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 		} else {
 			NSDictionary *jsonObj = [ [NSDictionary alloc]
 				initWithObjectsAndKeys :
@@ -127,15 +128,6 @@ NSString* callbackId = nil;
 
 @implementation FileOpener2 (UIDocumentInteractionControllerDelegate)
 - (void)documentInteractionControllerDidDismissOpenInMenu:(UIDocumentInteractionController *)controller {
-	[self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
-}
-
-- (void)documentInteractionControllerDidEndPreview:(UIDocumentInteractionController *)controller {
-	// [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
-}
-
-- (void) documentInteractionControllerWillBeginPreview: (UIDocumentInteractionController *)controller{
-	pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString: @""];
 	[self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 }
 
